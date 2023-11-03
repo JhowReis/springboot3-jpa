@@ -1,15 +1,9 @@
 package com.jonathanreis.curso.config;
 
 
-import com.jonathanreis.curso.entities.Category;
-import com.jonathanreis.curso.entities.Order;
-import com.jonathanreis.curso.entities.Product;
-import com.jonathanreis.curso.entities.User;
+import com.jonathanreis.curso.entities.*;
 import com.jonathanreis.curso.entities.enums.OrderStatus;
-import com.jonathanreis.curso.repositories.CategoryRepository;
-import com.jonathanreis.curso.repositories.OrderRepository;
-import com.jonathanreis.curso.repositories.ProductRepository;
-import com.jonathanreis.curso.repositories.UserRepository;
+import com.jonathanreis.curso.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,8 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    OrderItemRepository orderItemRepository;
 
 
 //    tudo desse metodo abaixo será executado quando a aplicação for iniciada
@@ -66,11 +62,16 @@ public class TestConfig implements CommandLineRunner {
 
         productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 
-
-
-
         userRepository.saveAll(Arrays.asList(u1,u2));
         orderRepository.saveAll(Arrays.asList(o1,o2, o3));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+
+        orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 
     }
 
