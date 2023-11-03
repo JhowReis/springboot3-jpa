@@ -22,6 +22,10 @@ public class Product implements Serializable {
     private String imgURL;
 
 //    usa-se o set para que a um produto não tenha mais de uma categoria
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+    joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
     public Product(){
